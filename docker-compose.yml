@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  web:
+    build: ./docker
+    container_name: php
+    volumes:
+      - ./application:/var/www/html
+      - ./docker/virtualhost.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "8765:80"
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data/redis

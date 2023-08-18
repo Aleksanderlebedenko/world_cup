@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Football World Cup Score Board{% endblock %}
+
+{% block body %}
+<style>
+    .base-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .current-matches {
+        display: flex;
+    }
+</style>
+
+<div class="base-wrapper">
+    <h1>Football World Cup Score Board ⚽</h1>
+
+    <div>
+        <h5>Upcoming matches:</h5>
+        <table>
+            {% for pair in upcomingPairs.pairs %}
+            <tr>
+                <td>{{ pair.homeTeam.value }}</td>
+                <td>-</td>
+                <td>{{ pair.awayTeam.value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <h5>Current matches:</h5>
+        <div class="current-matches">
+            {% for pair in currentPairs.pairs %}
+                <div class="pair">
+                    <div>{{ pair.home.name }} {{ pair.home.score }}</div>
+                    -
+                    <div>{{ pair.away.score }} {{ pair.away.name }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h5>Finished matches:</h5>
+        <table>
+            {% for pair in finishedPairs.pairs %}
+                <tr>
+                    <td>{{ pair.home.name }} {{ pair.home.score }}</td>
+                    <td>-</td>
+                    <td>{{ pair.away.score }} {{ pair.away.name }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

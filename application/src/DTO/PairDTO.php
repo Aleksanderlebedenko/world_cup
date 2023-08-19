@@ -9,12 +9,13 @@ use DateTimeImmutable;
 readonly class PairDTO
 {
     public function __construct(
-        public readonly CountryTeamEnum $homeTeam,
-        public readonly CountryTeamEnum $awayTeam,
-        public readonly MatchStatusEnum $status,
-        public readonly ResultDTO $result,
-        public readonly ?DateTimeImmutable $startDate = null,
-        public readonly ?DateTimeImmutable $endDate = null,
+        public string $id,
+        public CountryTeamEnum $homeTeam,
+        public CountryTeamEnum $awayTeam,
+        public MatchStatusEnum $status,
+        public ResultDTO $result,
+        public ?DateTimeImmutable $startDate = null,
+        public ?DateTimeImmutable $endDate = null,
     ) {
     }
 }

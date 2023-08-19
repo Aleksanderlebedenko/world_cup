@@ -141,6 +141,7 @@ class ScoreboardServiceTest extends TestCase
     {
         return new PairsDTO([
             (new PairDTO(
+                id: 1,
                 homeTeam: CountryTeamEnum::ENGLAND,
                 awayTeam: CountryTeamEnum::CROATIA,
                 status: $matchStatusEnum,

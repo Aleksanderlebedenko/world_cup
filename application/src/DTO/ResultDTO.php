@@ -7,9 +7,9 @@ use App\Enum\WinnerEnum;
 readonly class ResultDTO
 {
     public function __construct(
-        public readonly int $home,
-        public readonly int $away,
-        public readonly WinnerEnum $winner,
+        public int $home,
+        public int $away,
+        public WinnerEnum $winner,
     ) {
     }
 }

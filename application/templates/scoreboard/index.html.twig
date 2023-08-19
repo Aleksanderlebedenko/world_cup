@@ -4,16 +4,18 @@
 
 {% block body %}
     <style>
-        .base-wrapper {
+        .base-wrapper, h1 {
             margin: 1em auto;
-            max-width: 800px;
             width: 95%;
             font: 18px/1.5 sans-serif;
+            display: flex;
         }
 
         .group-of-matches {
             display: flex;
             flex-wrap: wrap;
+            border: 1px solid grey;
+            min-width: 200px;
         }
 
         .pair {
@@ -34,44 +36,49 @@
         }
     </style>
 
+    <h1>Football World Cup Score Board ⚽</h1>
     <div class="base-wrapper">
-        <h1>Football World Cup Score Board ⚽</h1>
 
-        <h5>Upcoming matches:</h5>
-        <div class="group-of-matches upcoming">
-            {% for pair in upcomingPairs.pairs %}
-                <div class="pair">
-                    <div class="name">{{ pair.homeTeam.value }}</div>
-                    <div class="delimiter">-</div>
-                    <div class="name">{{ pair.awayTeam.value }}</div>
-                </div>
-            {% endfor %}
+        <div class="group-of-matches-wrapper">
+            <h5>Upcoming matches:</h5>
+            <div class="group-of-matches upcoming">
+                {% for pair in upcomingPairs.pairs %}
+                    <div class="pair" data-pair-id="{{ pair.id }}">
+                        <div class="name">{{ pair.homeTeam.value }}</div>
+                        <div class="delimiter">-</div>
+                        <div class="name">{{ pair.awayTeam.value }}</div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
+        <div class="group-of-matches-wrapper">
 
-        <h5>Current matches:</h5>
-        <div class="group-of-matches current">
-            {% for pair in currentPairs.pairs %}
-                <div class="pair">
-                    <div class="name">{{ pair.homeTeam.value }}</div>
-                    <div class="result">{{ pair.result.home }}</div>
-                    <div class="delimiter">-</div>
-                    <div class="result">{{ pair.result.away }}</div>
-                    <div class="name">{{ pair.awayTeam.value }}</div>
-                </div>
-            {% endfor %}
+            <h5>Current matches:</h5>
+            <div class="group-of-matches current">
+                {% for pair in currentPairs.pairs %}
+                    <div class="pair" data-pair-id="{{ pair.id }}">
+                        <div class="name">{{ pair.homeTeam.value }}</div>
+                        <div class="result">{{ pair.result.home }}</div>
+                        <div class="delimiter">-</div>
+                        <div class="result">{{ pair.result.away }}</div>
+                        <div class="name">{{ pair.awayTeam.value }}</div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-
-        <h5>Finished matches:</h5>
-        <div class="group-of-matches finished">
-            {% for pair in finishedPairs.pairs %}
-                <div class="pair">
-                    <div class="name">{{ pair.homeTeam.value }}</div>
-                    <div class="result">{{ pair.result.home }}</div>
-                    <div class="delimiter">-</div>
-                    <div class="result">{{ pair.result.away }}</div>
-                    <div class="name">{{ pair.awayTeam.value }}</div>
-                </div>
-            {% endfor %}
+        <div class="group-of-matches-wrapper">
+            <h5>Finished matches:</h5>
+            <div class="group-of-matches finished">
+                {% for pair in finishedPairs.pairs %}
+                    <div class="pair" data-pair-id="{{ pair.id }}">
+                        <div class="name">{{ pair.homeTeam.value }}</div>
+                        <div class="result">{{ pair.result.home }}</div>
+                        <div class="delimiter">-</div>
+                        <div class="result">{{ pair.result.away }}</div>
+                        <div class="name">{{ pair.awayTeam.value }}</div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

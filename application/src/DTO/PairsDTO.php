@@ -8,7 +8,7 @@ readonly class PairsDTO
      * @param PairDTO[] $pairs
      */
     public function __construct(
-        public readonly array $pairs = [],
+        public array $pairs = [],
     ) {
     }
 }

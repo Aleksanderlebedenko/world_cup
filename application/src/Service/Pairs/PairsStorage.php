@@ -22,6 +22,7 @@ class PairsStorage
     public function getPairs(): PairsDTO
     {
         $pairs = [];
+        $id = 1;
 
         foreach (CountryTeamEnum::cases() as $homeTeam) {
             foreach (CountryTeamEnum::cases() as $awayTeam) {
@@ -36,6 +37,7 @@ class PairsStorage
                 $endTime = $this->createEndMatchDate($matchStatus, $startTime);
 
                 $pair = new PairDTO(
+                    $id++,
                     $homeTeam,
                     $awayTeam,
                     $matchStatus,

@@ -96,12 +96,14 @@ class PairsProviderFromCacheTest extends TestCase
     {
         return [
             new PairDTO(
+                id: 1,
                 homeTeam: CountryTeamEnum::ENGLAND,
                 awayTeam: CountryTeamEnum::CROATIA,
                 status: MatchStatusEnum::UPCOMING,
                 result: new ResultDTO(0, 0, WinnerEnum::UPCOMING),
             ),
             new PairDTO(
+                id: 2,
                 homeTeam: CountryTeamEnum::BRAZIL,
                 awayTeam: CountryTeamEnum::ARGENTINA,
                 status: MatchStatusEnum::UPCOMING,
@@ -117,12 +119,14 @@ class PairsProviderFromCacheTest extends TestCase
     {
         return [
             new PairDTO(
+                id: 3,
                 homeTeam: CountryTeamEnum::AUSTRIA,
                 awayTeam: CountryTeamEnum::HUNGARY,
                 status: MatchStatusEnum::IN_PROGRESS,
                 result: new ResultDTO(0, 0, WinnerEnum::DRAW),
             ),
             new PairDTO(
+                id: 4,
                 homeTeam: CountryTeamEnum::DENMARK,
                 awayTeam: CountryTeamEnum::CZECH_REPUBLIC,
                 status: MatchStatusEnum::IN_PROGRESS,
@@ -138,12 +142,14 @@ class PairsProviderFromCacheTest extends TestCase
     {
         return [
             new PairDTO(
+                id: 5,
                 homeTeam: CountryTeamEnum::POLAND,
                 awayTeam: CountryTeamEnum::CANADA,
                 status: MatchStatusEnum::FINISHED,
                 result: new ResultDTO(0, 0, WinnerEnum::DRAW),
             ),
             new PairDTO(
+                id: 6,
                 homeTeam: CountryTeamEnum::PORTUGAL,
                 awayTeam: CountryTeamEnum::NORWAY,
                 status: MatchStatusEnum::FINISHED,

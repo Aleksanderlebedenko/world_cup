@@ -1,7 +1,8 @@
 <?php
 
-namespace App\DTO;
+namespace App\DTO\Pair;
 
+use App\DTO\ResultDTO;
 use App\Enum\CountryTeamEnum;
 use App\Enum\MatchStatusEnum;
 use DateTimeImmutable;

@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\DTO\PairsDTO;
+use App\DTO\Pair\PairsDTO;
 use App\Exception\CannotGetPairsException;
 use App\Service\Pairs\PairsProvider;
 use Psr\Log\LoggerInterface;

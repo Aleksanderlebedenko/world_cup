@@ -2,8 +2,7 @@
 
 namespace App\Service\Pairs;
 
-use App\DTO\PairsDTO;
-use App\Enum\MatchStatusEnum;
+use App\DTO\Pair\PairsDTO;
 
 interface PairsProvider
 {

@@ -2,7 +2,7 @@
 
 namespace App\Service\Pairs;
 
-use App\DTO\PairsDTO;
+use App\DTO\Pair\PairsDTO;
 use App\Enum\MatchStatusEnum;
 use App\Exception\CannotGetPairsException;
 use Psr\Cache\InvalidArgumentException;

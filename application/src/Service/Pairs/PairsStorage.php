@@ -2,8 +2,8 @@
 
 namespace App\Service\Pairs;
 
-use App\DTO\PairDTO;
-use App\DTO\PairsDTO;
+use App\DTO\Pair\PairDTO;
+use App\DTO\Pair\PairsDTO;
 use App\DTO\ResultDTO;
 use App\Enum\CountryTeamEnum;
 use App\Enum\MatchStatusEnum;

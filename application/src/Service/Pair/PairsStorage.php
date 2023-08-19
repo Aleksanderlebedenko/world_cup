@@ -83,6 +83,10 @@ class PairsStorage
             return new DateTimeImmutable(sprintf('now + %d seconds', rand(10, 3600)));
         }
 
+        if ($matchStatus->name === MatchStatusEnum::IN_PROGRESS->name) {
+            return new DateTimeImmutable('now ');
+        }
+
         return null;
     }
 

@@ -4,7 +4,7 @@ namespace App\DTO;
 
 use App\Enum\WinnerEnum;
 
-readonly class ResultDTO
+class ResultDTO
 {
     public function __construct(
         public int $home,

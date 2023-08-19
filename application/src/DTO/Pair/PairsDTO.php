@@ -2,7 +2,7 @@
 
 namespace App\DTO\Pair;
 
-readonly class PairsDTO
+class PairsDTO
 {
     /**
      * @param PairDTO[] $pairs

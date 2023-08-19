@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Service\Pair;
+namespace App\Service\Provider;
 
 use App\DTO\Pair\PairsDTO;
 use App\Enum\MatchStatusEnum;
 use App\Exception\CannotGetPairsException;
+use App\Service\Pair\PairsProvider;
+use App\Service\Pair\PairsStorage;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -41,7 +43,31 @@ class PairsProviderFromCache implements PairsProvider
         return $this->getPairsByStatus($pairs, MatchStatusEnum::FINISHED);
     }
 
-    private function getPairs(): PairsDTO
+    public function resetPairs(PairsDTO $pairsDTO): PairsDTO
+    {
+        $this->cache->delete(self::PAIRS_CACHE_KEY);
+
+        try {
+            return $this->cache->get(
+                self::PAIRS_CACHE_KEY,
+                function (ItemInterface $item) use ($pairsDTO) {
+                    $item->expiresAfter(
+                        date_interval_create_from_date_string(self::PAIRS_CACHE_EXPIRES_PERIOD)
+                    );
+
+                    return $pairsDTO;
+                }
+            );
+        } catch (InvalidArgumentException $e) {
+            throw new CannotGetPairsException(
+                sprintf('Cannot get pairs from cache: %s', $e->getMessage()),
+                $e->getCode(),
+                $e
+            );
+        }
+    }
+
+    public function getPairs(): PairsDTO
     {
         try {
             return $this->cache->get(

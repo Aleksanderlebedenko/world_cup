@@ -7,7 +7,7 @@ use App\Enum\CountryTeamEnum;
 use App\Enum\MatchStatusEnum;
 use DateTimeImmutable;
 
-readonly class PairDTO
+class PairDTO
 {
     public function __construct(
         public string $id,

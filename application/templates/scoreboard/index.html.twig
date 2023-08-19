@@ -5,7 +5,6 @@
 {% block body %}
     <h1>Football World Cup Score Board ⚽</h1>
     <div class="base-wrapper">
-
         <div class="group-of-matches-wrapper">
             <h5>Upcoming matches:</h5>
             <div class="group-of-matches upcoming">
@@ -25,9 +24,9 @@
                 {% for pair in currentPairs.pairs %}
                     <div class="pair" data-pair-id="{{ pair.id }}">
                         <div class="name">{{ pair.homeTeam.value }}</div>
-                        <div class="result">{{ pair.result.home }}</div>
+                        <div class="result result-home">{{ pair.result.home }}</div>
                         <div class="delimiter">-</div>
-                        <div class="result">{{ pair.result.away }}</div>
+                        <div class="result result-away">{{ pair.result.away }}</div>
                         <div class="name">{{ pair.awayTeam.value }}</div>
                     </div>
                 {% endfor %}
@@ -39,9 +38,9 @@
                 {% for pair in finishedPairs.pairs %}
                     <div class="pair" data-pair-id="{{ pair.id }}">
                         <div class="name">{{ pair.homeTeam.value }}</div>
-                        <div class="result">{{ pair.result.home }}</div>
+                        <div class="result result-home">{{ pair.result.home }}</div>
                         <div class="delimiter">-</div>
-                        <div class="result">{{ pair.result.away }}</div>
+                        <div class="result result-away">{{ pair.result.away }}</div>
                         <div class="name">{{ pair.awayTeam.value }}</div>
                     </div>
                 {% endfor %}

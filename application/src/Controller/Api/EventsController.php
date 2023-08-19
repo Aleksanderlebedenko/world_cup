@@ -2,11 +2,11 @@
 
 namespace App\Controller\Api;
 
+use App\Service\EventService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * I didn't extend this controller from AbstractApiController because in this app it will be only get calls
@@ -16,7 +16,6 @@ class EventsController extends AbstractController
 {
     public function __construct(
         private readonly EventService $eventService,
-        private readonly SerializerInterface $serializer,
     ) {
     }
 
@@ -24,7 +23,6 @@ class EventsController extends AbstractController
     public function index(): JsonResponse
     {
         $events = $this->eventService->getEvents();
-        $this->serializer->serialize($events, 'json');
 
         return $this->json($events, Response::HTTP_OK);
     }

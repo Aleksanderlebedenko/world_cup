@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\DTO\Pair\PairsDTO;
 use App\Exception\CannotGetPairsException;
-use App\Service\Pairs\PairsProvider;
+use App\Service\Pair\PairsProvider;
 use Psr\Log\LoggerInterface;
 
 readonly class ScoreboardService

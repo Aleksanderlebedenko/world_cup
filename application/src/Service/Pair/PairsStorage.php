@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Pairs;
+namespace App\Service\Pair;
 
 use App\DTO\Pair\PairDTO;
 use App\DTO\Pair\PairsDTO;

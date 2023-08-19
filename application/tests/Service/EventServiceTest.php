@@ -10,26 +10,45 @@ use App\Enum\CountryTeamEnum;
 use App\Enum\EventTypeEnum;
 use App\Enum\MatchStatusEnum;
 use App\Enum\WinnerEnum;
+use App\Exception\CannotGetEventsException;
+use App\Service\Event\EventsProvider;
+use App\Service\EventService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 class EventServiceTest extends TestCase
 {
     private EventService $eventService;
-    private EventProvider|MockObject $eventProvider;
-
+    private EventsProvider|MockObject $eventsProvider;
+    private MockObject|LoggerInterface $logger;
     protected function setUp(): void
     {
-        $this->eventProvider = $this->createMock(EventProvider::class);
-        $this->eventService = new EventService($this->eventProvider);
+        $this->eventsProvider = $this->createMock(EventsProvider::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
+
+        $this->eventService = new EventService(
+            $this->eventsProvider,
+            $this->logger,
+        );
     }
 
     public function testGetEvents()
     {
-        $this->eventProvider->method('getEvents')->willReturn(new EventsDTO([$this->getEventDTO()]));
+        $this->eventsProvider->method('getEvents')->willReturn(new EventsDTO([$this->getEventDTO()]));
         $result = $this->eventService->getEvents();
 
         $this->assertEquals(new EventsDTO([$this->getEventDTO()]), $result);
+    }
+
+    public function testGetEventsThrowsException()
+    {
+        $this->eventsProvider->method('getEvents')->willThrowException(new CannotGetEventsException());
+        $this->logger->expects($this->once())->method('error');
+
+        $result = $this->eventService->getEvents();
+
+        $this->assertEquals(new EventsDTO([]), $result);
     }
 
     private function getEventDTO(): EventDTO

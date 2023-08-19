@@ -9,7 +9,7 @@ use App\Enum\CountryTeamEnum;
 use App\Enum\MatchStatusEnum;
 use App\Enum\WinnerEnum;
 use App\Exception\CannotGetPairsException;
-use App\Service\Pairs\PairsProvider;
+use App\Service\Pair\PairsProvider;
 use App\Service\ScoreboardService;
 use Generator;
 use PHPUnit\Framework\MockObject\MockObject;

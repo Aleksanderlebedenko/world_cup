@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Service;
+namespace tests\Service\Pair;
 
 use App\DTO\Pair\PairDTO;
 use App\DTO\Pair\PairsDTO;
@@ -9,8 +9,8 @@ use App\Enum\CountryTeamEnum;
 use App\Enum\MatchStatusEnum;
 use App\Enum\WinnerEnum;
 use App\Exception\CannotGetPairsException;
+use App\Service\Pair\PairsProviderFromCache;
 use App\Service\Pair\PairsStorage;
-use App\Service\Provider\PairsProviderFromCache;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\InvalidArgumentException;
@@ -59,6 +59,25 @@ class PairsProviderFromCacheTest extends TestCase
         $this->assertEquals(new PairsDTO($this->getFinishedPairs()), $result);
     }
 
+    public function testGetPairs(): void
+    {
+        $this->cache->method('get')->willReturn($this->getPairsDTO());
+
+        $result = $this->pairsProviderFromCache->getPairs();
+
+        $this->assertEquals($this->getPairsDTO(), $result);
+    }
+
+    public function testResetPairs(): void
+    {
+        $this->cache->method('delete')->willReturn(true);
+        $this->cache->method('get')->willReturn($this->getPairsDTO());
+
+        $result = $this->pairsProviderFromCache->resetPairs($this->getPairsDTO());
+
+        $this->assertEquals($this->getPairsDTO(), $result);
+    }
+
     public function testGetUpcomingPairsThrowsException(): void
     {
         $this->gettingPairsThrowsException();
@@ -77,6 +96,34 @@ class PairsProviderFromCacheTest extends TestCase
         $this->pairsProviderFromCache->getFinishedPairs();
     }
 
+    public function testGetPairsThrowsException(): void
+    {
+        $this->gettingPairsThrowsException();
+        $this->pairsProviderFromCache->getPairs();
+    }
+
+    public function testResetPairsDeleteThrowsException(): void
+    {
+        $this->cache->method('delete')->willThrowException(
+            $this->createMock(InvalidArgumentException::class)
+        );
+
+        $this->expectException(CannotGetPairsException::class);
+
+        $this->pairsProviderFromCache->resetPairs($this->getPairsDTO());
+    }
+
+    public function testResetPairsGettingThrowsException(): void
+    {
+        $this->cache->method('delete')->willReturn(true);
+        $this->cache->method('get')->willThrowException(
+            $this->createMock(InvalidArgumentException::class)
+        );
+
+        $this->expectException(CannotGetPairsException::class);
+
+        $this->pairsProviderFromCache->resetPairs($this->getPairsDTO());
+    }
 
     private function getPairsDTO(): PairsDTO
     {

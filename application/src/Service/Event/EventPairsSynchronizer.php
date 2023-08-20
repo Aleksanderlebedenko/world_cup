@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Service\Provider;
+namespace App\Service\Event;
 
 use App\DTO\Event\EventsDTO;
+use App\Service\Pair\PairsProviderFromCache;
 
-readonly class EventPairsSynchronizer
+class EventPairsSynchronizer
 {
     public function __construct(
         private PairsProviderFromCache $pairsProviderFromCache,
